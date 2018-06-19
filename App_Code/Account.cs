@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
+using System.Data;
 
 /// <summary>
 /// Summary description for Account
@@ -23,6 +24,11 @@ public class Account
 
     public void Get_Account(string userName)
     {
+        DataSet dataset = new DataSet();
+        SqlDataAdapter adapter = new SqlDataAdapter("sp_getAccount '"+ userName + "'", new DBConnect().GetConnect());
+        adapter.Fill(dataset);
+
+
         accountId = "1";
 
         firstname = "chayathat";

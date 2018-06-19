@@ -11,6 +11,8 @@ public class User
     string username { get; set; }
     public User()
     {
+
+      
         //
         // TODO: Add constructor logic here
         //
