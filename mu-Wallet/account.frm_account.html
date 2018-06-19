@@ -4,6 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <script src="Scripts/jquery-1.10.2.js"></script>
+
 </head>
 <body>
     <table>
@@ -32,11 +34,11 @@
                     <table >
                         <tr>
                             <td valign="top" >
-                                <div><h2>เช็คยอดเงิน : </h2>บัญชี <input type="text" id="account" value="123-456-789"></div>
+                                <div><h2>เช็คยอดเงิน : </h2>บัญชี <input type="text" id="accountNo" value=""></div>
                             </td>
                             <td valign="top">
                                 <h2>&nbsp;</h2>
-                                <input type="text" id="account" value="2000"> บาท
+                                <input type="text" id="amount" value=""> บาท
                             </td>
                         </tr>
                         <tr>
@@ -53,3 +55,42 @@
 
 </body>
 </html>
+
+<script>
+
+    GetAccount();
+
+    function GetAccount() {
+        var _item = new Array();
+        var _username = "chayathat.pru";
+
+        _item.push({
+            username: _username
+        });
+
+        var _var = "action=GetAccount&itemList=" + JSON.stringify(_item);
+        $.ajax({
+            url: "Service/Handler.ashx",
+            type: "Post",
+            data: _var,
+            dataType: "html",
+            charset: 'utf-8',
+            success: function (_data) {
+                /*
+                alert(_data);
+                var _obj = JSON.parse(_data);
+
+                $("#accountNo").val(_obj.accountNo);
+                $("#amount").val(_obj.blcAmount);*/
+                //alert(_obj.firstname);
+                alert(_data);
+                window.location.href = "frm_transfer_complete.html";
+
+            },
+            error: function (_e) {
+                alert(_e);
+            }
+        });
+    }
+
+</script>

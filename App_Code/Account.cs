@@ -14,6 +14,7 @@ public class Account
     public String firstname { get; set; }
     public String lastname { get; set; }
     public String accountNo { get; set; }
+    public String blcAmount { get; set; }
 
     public Account()
     {
@@ -33,7 +34,8 @@ public class Account
 
         firstname = "chayathat";
         lastname = "pruksacheva";
-        accountNo = "123456789";
+        accountNo = "123-456-789";
+        blcAmount = "2,000";
         
     }
 }

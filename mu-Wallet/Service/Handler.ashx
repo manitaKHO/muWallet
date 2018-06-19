@@ -11,54 +11,47 @@ using System.Web.SessionState;
 using System.Collections.Generic;
 using System.Data.OleDb;
 using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 
-public class Handler : IHttpHandler 
+public class Handler : IHttpHandler
 {
-    
+
     public void ProcessRequest (HttpContext context)
     {
         string Action = context.Request["action"];
+        dynamic _result = new { };
         switch (Action)
         {
+            case "GetAccount": GetAccount(context); break;
             case "SetTransfer" : SetTransfer(context); break;
-            
+
 
         }
 
     }
+    public void GetAccount(HttpContext _c)
+    {
+        Account _account = new Account();
+        _account.Get_Account("chayathat.pru");
+
+        _c.Response.Write(JsonConvert.SerializeObject(_account));
+    }
 
     public void SetTransfer(HttpContext _c)
     {
-        /*
-        int _error = 0;
-        string _applicationId = String.Empty;
-        string _return = String.Empty;
+        DataSet dataset = new DataSet();
+        SqlDataAdapter adapter = new SqlDataAdapter("sp_SetTransfer" + "'chayathat.pru','123-456-789','234-567-123','30'", new DBConnect().GetConnect());
+        adapter.Fill(dataset);
 
-        var _dtSetTransfer = Newtonsoft.Json.JsonConvert.DeserializeObject<DataTable>(_c.Request["itemList"]);
+        _c.Response.Write("Transfer Success");
+        //_c.Response.Redirect("frm_transfer_complete.html");
+    }
 
-        if (_dtSetTransfer.Rows.Count == 0)
-            _error = 1;
-        else
-        {
-            DataSet _ds = MyAdmin.SetDocumentStatus(_dtSetDocumentStatus);
-            DataRow _dr = _ds.Tables[0].Rows[0];
 
-            _applicationId = _dr["applicationId"].ToString();
-            _ds.Dispose();
-        }
 
-        _error = (!String.IsNullOrEmpty(_applicationId) ? 0 : 1);
-
-        _return += "<error>" + _error.ToString() + "<error>";
-
-        */
-        _c.Response.Write(_return);
-    } 
-
-    
-    public bool IsReusable 
+    public bool IsReusable
     {
-        get 
+        get
         {
             return false;
         }

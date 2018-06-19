@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-
+<script src="Scripts/jquery-1.10.2.js"></script>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
@@ -58,7 +58,7 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td><button type="button">ยกเลิก</button>&nbsp;&nbsp;<button type="button">ตกลง</button></td>
+                            <td><button type="button">ยกเลิก</button>&nbsp;&nbsp;<button type="button" onclick="SetTransfer()">ตกลง</button></td>
                         </tr>
                     </table>
                </dev>
@@ -70,39 +70,49 @@
 </html>
 
 <script>
+
+    
+
+
     function SetTransfer()
     {
         var _item = new Array();
         var _username = "chayathat.pru";
-        var _fromAccountNo = $("#fromAccountNo").val();
-        var _toAccountNo = $("#toAccountNo").val();
-        var _amount = $("#amount").val();
+        var _fromAccountNo = document.getElementById("fromAccountNo").value;//$("#fromAccountNo").val();
+        var _toAccountNo = document.getElementById("toAccountNo").value; //$("#toAccountNo").val();
+        var _amount = document.getElementById("amount").value//$("#amount").val();
 
-
+        
         _item.push({
             username: _username
             , fromAccountNo: _fromAccountNo
             , toAccountNo: _toAccountNo
             , amount: _amount
         });
+        
+
+        
 
         var _var = "action=SetTransfer&itemList=" + JSON.stringify(_item);
+        
         $.ajax({
-            url: _urlHandler,
+            url: "Service/Handler.ashx",
             type: "Post",
             data: _var,
             dataType: "html",
             charset: 'utf-8',
             success: function (_data) {
-                var _dataError = _data.split("<error>");
-                if (_dataError[1] == "0") {
-                    alert(_dataError[1]);
-                }
-                else
-                    alert("fdfdfdf")
+                alert(_data);
+                window.open("account.frm_transfer_complete.html");
+                //var _obj = JSON.parse(_data);
+
+                //$("#accountNo").val(_obj.accountNo);
+                //$("#amount").val(_obj.blcAmount);
+                //alert(_obj.firstname);
+
             },
-            error: function () {
-               
+            error: function (_e) {
+                alert(_e);
             }
         });
     }
