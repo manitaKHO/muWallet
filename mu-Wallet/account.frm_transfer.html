@@ -44,7 +44,7 @@
                             </td>
                             <td valign="top">
                                 &nbsp;&nbsp;
-                                <input type="text" id="toAccountNo" value="">
+                                <input type="text" id="toAccountNo" value="234-567-123">
                             </td>
                         </tr>
                         <tr>
@@ -93,7 +93,7 @@
 
         
 
-        var _var = "action=SetTransfer&itemList=" + JSON.stringify(_item);
+        var _var = "action=SetTransfer&amt="+ _amount +"&itemList=" + JSON.stringify(_item);
         
         $.ajax({
             url: "Service/Handler.ashx",

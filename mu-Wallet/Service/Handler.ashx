@@ -39,8 +39,10 @@ public class Handler : IHttpHandler
 
     public void SetTransfer(HttpContext _c)
     {
+       // dynamic obj = JsonConvert.DeserializeObject(_c.Request["itemList"]);
+            string _amt = _c.Request["amt"];
         DataSet dataset = new DataSet();
-        SqlDataAdapter adapter = new SqlDataAdapter("sp_SetTransfer" + "'chayathat.pru','123-456-789','234-567-123','30'", new DBConnect().GetConnect());
+        SqlDataAdapter adapter = new SqlDataAdapter("sp_SetTransfer" + "'chayathat.pru','123-456-789','234-567-123','" + _amt +"'", new DBConnect().GetConnect());
         adapter.Fill(dataset);
 
         _c.Response.Write("Transfer Success");

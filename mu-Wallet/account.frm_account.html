@@ -76,15 +76,14 @@
             dataType: "html",
             charset: 'utf-8',
             success: function (_data) {
-                /*
-                alert(_data);
+                
+                //alert(_data);
                 var _obj = JSON.parse(_data);
 
                 $("#accountNo").val(_obj.accountNo);
-                $("#amount").val(_obj.blcAmount);*/
+                $("#amount").val(_obj.blcAmount);
                 //alert(_obj.firstname);
-                alert(_data);
-                window.location.href = "frm_transfer_complete.html";
+             
 
             },
             error: function (_e) {
