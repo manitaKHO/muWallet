@@ -27,8 +27,20 @@
                 </table>
             </td>
             <td>
-                <h1>โอนเงิน</h1>
+                <h1><strong>โอนเงิน</strong></h1>
+                <div><center> โอนเงินสำเร็จ </center></div>
+                <form>
+                    <label for="sender">บัญชีผู้โอน</label>
+                    <input type="text" name="fromAccountNo" id="fromAccountNo" value="fromAccountNo" disabled><br>
+                    <label for="receive">บัญชีผู้รับโอน</label>
+                    <input type="text" name="toAccountNo" id="ToAccountNo" value="ToAccountNo" disabled><br>
+                    <label for="other">จำนวนเงินที่โอน</label>
+                    <input type="text" name="amount" id="amount" value="amount" disabled><br><br>
+                    <input type="submit" value="ตกลง">
+                </form>
             </td>
+            
+                
         </tr>
     </table>
 
